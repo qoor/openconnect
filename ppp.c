@@ -1264,6 +1264,8 @@ static int ppp_mainloop(struct openconnect_info *vpninfo, int dtls,
 				return ret;
 			else if ((ret = handle_state_transition(vpninfo, dtls, kai, timeout)) < 0)
 				return ret;
+			else if (ret && ppp->ppp_state == PPPS_NETWORK)
+				work_done = 1;
 			break;
 
 		case PPP_IP:
